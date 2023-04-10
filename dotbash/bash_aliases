@@ -1,0 +1,24 @@
+me=${whoami}
+
+# aliases
+alias ll='ls -alF'
+alias ag='ag --path-to-ignore ~/.agignore'
+
+# yarn + hadoop + spark
+alias hls="hadoop fs -ls"
+alias hdu="hadoop fs -du -h"
+alias htxt="hadoop fs -text"
+alias apps="yarn application -list | tr -d ' ' | grep ${me}"
+alias shll="/usr/local/lib/spark/bin/spark-shell --master local"
+
+# locations
+alias prch='cd ~/src/perch'
+alias oss='cd ~/src/oss'
+alias nts='cd ~/notes'
+
+# docker alias
+alias dckr='docker ps | grep -Eo "^[^\"]+"'
+
+# python aliases
+alias py='python3'
+alias v='nvim'
