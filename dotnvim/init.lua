@@ -44,7 +44,7 @@ lspconfig.rust_analyzer.setup {
 local dap = require('dap')
 dap.adapters.python = {
   type = 'executable';
-  command = os.getenv('HOME') .. '/projects/symmetric/.venv/bin/python3';
+  command = os.getenv('HOME') .. '/python3';
   args = { '-m', 'debugpy.adapter' };
 }
 
@@ -107,12 +107,6 @@ require('Comment').setup()
 vim.api.nvim_set_keymap('n', '<C-_>', 'gcc', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<C-_>', 'gc', { noremap = true, silent = true })
 
-vim.o.termguicolors = true
-vim.cmd [[
-  colorscheme slate
-  set background=dark
-]]
-
 -- Function to prompt for a directory and search within it
 function SearchInDirectory()
   local opts = {
@@ -146,31 +140,28 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 local telescope = require('telescope')
 local fb_actions = require "telescope._extensions.file_browser.actions"
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  callback = function()
-    vim.api.nvim_buf_set_option(0, 'modifiable', true)
-  end,
-})
+--vim.api.nvim_create_autocmd("BufEnter", {
+--  pattern = "*",
+--  callback = function()
+--    vim.api.nvim_buf_set_option(0, 'modifiable', true)
+--  end,
+--})
 
-telescope.setup {
-  extensions = {
-    file_browser = {
-      hijack_netrw = true,
-      mappings = {
-        ["i"] = {
-          ["<A-c>"] = fb_actions.create,  -- Alt + c to create file/folder
-          ["<S-CR>"] = fb_actions.create_from_prompt,  -- Shift + Enter to create from prompt
-        },
-        ["n"] = {
-          ["c"] = fb_actions.create,  -- c to create file/folder
-        },
-      },
-    },
-  },
-}
+--telescope.setup {
+--  extensions = {
+--    file_browser = {
+--      hijack_netrw = true,
+--      mappings = {
+--        ["i"] = {
+--          ["<A-c>"] = fb_actions.create,  -- Alt + c to create file/folder
+--          ["<S-CR>"] = fb_actions.create_from_prompt,  -- Shift + Enter to create from prompt
+--        },
+--        ["n"] = {
+--          ["c"] = fb_actions.create,  -- c to create file/folder
+--        },
+--      },
+--    },
+--  },
+--}
 
 telescope.load_extension('file_browser')
-vim.cmd("colorscheme kanagawa-wave")
---vim.cmd("colorscheme kanagawa-dragon")
---vim.cmd("colorscheme kanagawa-lotus")
