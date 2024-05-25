@@ -44,7 +44,7 @@ lspconfig.rust_analyzer.setup {
 local dap = require('dap')
 dap.adapters.python = {
   type = 'executable';
-  command = os.getenv('HOME') .. '/python3';
+  command = 'python3';
   args = { '-m', 'debugpy.adapter' };
 }
 
