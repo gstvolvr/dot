@@ -37,34 +37,44 @@ packer.init({
 
 packer.startup(function(use)
   use { 'wbthomason/packer.nvim' }
+  -- use { 'nvim-tree/nvim-web-devicons' }
+  use 'nvim-lua/plenary.nvim'
+  use 'numToStr/Comment.nvim'
+  use "rebelot/kanagawa.nvim"
 
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    },
-    tag = 'nightly',
-    config = get_setup('nvim-tree'),
-  }
+  -- use {
+  --   'kyazdani42/nvim-tree.lua',
+  --   requires = {
+  --     'kyazdani42/nvim-web-devicons',
+  --   },
+  --   tag = 'nightly',
+  --   config = get_setup('nvim-tree'),
+  -- }
+  --use {
+  --    'nvim-treesitter/nvim-treesitter',
+  --    run = function()
+  --        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+  --        ts_update()
+  --    end,
+  --}
 
-  use { 'nvim-lualine/lualine.nvim',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-      opt = true
-    },
-    config = get_setup('lualine'),
-  }
+  -- use { 'nvim-lualine/lualine.nvim',
+  --   requires = {
+  --     'kyazdani42/nvim-web-devicons',
+  --     opt = true
+  --   },
+  --   config = get_setup('lualine'),
+  -- }
 
-  use { 'airblade/vim-gitgutter' }
-  use { 'tpope/vim-fugitive' }
+  -- use { 'tpope/vim-fugitive' }
 
-  use { 'tpope/vim-commentary' }
+  -- use { 'tpope/vim-commentary' }
 
-  use { 'mg979/vim-visual-multi' }
+  -- use { 'mg979/vim-visual-multi' }
 
-  use { 'sainnhe/everforest',
-    config = get_setup('colorscheme'),
-  }
+  -- use { 'sainnhe/everforest',
+  --   config = get_setup('colorscheme'),
+  -- }
 
   use { 'nvim-telescope/telescope.nvim',
     requires = {
@@ -74,11 +84,6 @@ packer.startup(function(use)
     config = get_setup('telescope'),
   }
   use { 'nvim-telescope/telescope-file-browser.nvim' }
-
-  use { "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = get_setup('treesitter'),
-  }
 
   use { 'hrsh7th/nvim-cmp',
     requires = {
@@ -95,9 +100,9 @@ packer.startup(function(use)
     config = get_setup('cmp'),
   }
 
-  use { 'rmagatti/goto-preview',
-    config = get_setup('goto-preview'),
-  }
+  -- use { 'rmagatti/goto-preview',
+  --   config = get_setup('goto-preview'),
+  -- }
 
   if packer_bootstrap then
     packer.sync()
