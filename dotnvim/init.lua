@@ -16,6 +16,68 @@ vim.o.termguicolors = true      -- Enable 24-bit RGB colors
 vim.o.hidden = true             -- Ensure hidden files are shown
 vim.o.path = vim.o.path .. '**' -- Set the path to search for files
 
+-- Keybindings for LSP functions
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+-- source: https://github.com/neovim/nvim-lspconfig
+local lspconfig = require('lspconfig')
+lspconfig.pyright.setup{}
+lspconfig.rust_analyzer.setup {
+  -- Server-specific settings. See `:help lspconfig-setup`
+  settings = {
+    ['rust-analyzer'] = {},
+  },
+}
+
+-- debuggers
+local dap = require('dap')
+dap.adapters.python = {
+  type = 'executable';
+  command = os.getenv('HOME') .. '/projects/symmetric/.venv/bin/python3';
+  args = { '-m', 'debugpy.adapter' };
+}
+
+--
+local rt = require("rust-tools")
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
+-- Rust testing
+-- Commands:
+-- RustEnableInlayHints
+-- RustDisableInlayHints
+-- RustSetInlayHints
+-- RustUnsetInlayHints
+
+-- Set inlay hints for the current buffer
+require('rust-tools').inlay_hints.set()
+-- Unset inlay hints for the current buffer
+-- require('rust-tools').inlay_hints.unset()
+
+-- Enable inlay hints auto update and set them for all the buffers
+require('rust-tools').inlay_hints.enable()
+-- Disable inlay hints auto update and unset them for all buffers
+-- require('rust-tools').inlay_hints.disable()
+
+
 -- Make `:e` use the directory of the current file by default
 -- vim.cmd [[
 --   autocmd BufEnter * lcd %:p:h
