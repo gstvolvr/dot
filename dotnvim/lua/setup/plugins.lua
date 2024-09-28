@@ -38,15 +38,6 @@ packer.init({
 packer.startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    },
-    tag = 'nightly',
-    config = get_setup('nvim-tree'),
-  }
-
   use { 'nvim-lualine/lualine.nvim',
     requires = {
       'kyazdani42/nvim-web-devicons',
@@ -62,10 +53,6 @@ packer.startup(function(use)
 
   use { 'mg979/vim-visual-multi' }
 
-  use { 'sainnhe/everforest',
-    config = get_setup('colorscheme'),
-  }
-
   use { 'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/popup.nvim',
@@ -74,11 +61,7 @@ packer.startup(function(use)
     config = get_setup('telescope'),
   }
   use { 'nvim-telescope/telescope-file-browser.nvim' }
-
-  use { "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = get_setup('treesitter'),
-  }
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   use { 'hrsh7th/nvim-cmp',
     requires = {
