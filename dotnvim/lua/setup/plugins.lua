@@ -39,17 +39,16 @@ packer.startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
   use {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     requires = {
-      'kyazdani42/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons',
     },
-    tag = 'nightly',
     config = get_setup('nvim-tree'),
   }
 
   use { 'nvim-lualine/lualine.nvim',
     requires = {
-      'kyazdani42/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons',
       opt = true
     },
     config = get_setup('lualine'),
@@ -97,6 +96,32 @@ packer.startup(function(use)
 
   use { 'rmagatti/goto-preview',
     config = get_setup('goto-preview'),
+  }
+
+  -- IntelliJ-like enhancements
+  use { 'folke/trouble.nvim', -- better diagnostics/error display
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
+
+  use { 'simrat39/symbols-outline.nvim', -- structure view like IntelliJ
+    config = function()
+      require("symbols-outline").setup()
+    end
+  }
+
+  use { 'lewis6991/gitsigns.nvim', -- better git integration
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
+
+  use { 'folke/which-key.nvim', -- command palette-like functionality
+    config = function()
+      require("which-key").setup {}
+    end
   }
 
   if packer_bootstrap then
