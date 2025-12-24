@@ -5,6 +5,7 @@ set -ex
 dotvim=~/src/gstvolvr/dot/dotvim
 dotnvim=~/src/gstvolvr/dot/dotnvim
 dotbash=~/src/gstvolvr/dot/dotbash
+dottmux=~/src/gstvolvr/dot/dottmux
 
 curl -fLo $dotvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
